@@ -7,9 +7,9 @@
     
 #### 2. Usage :
 
-1. Enable debug :
+1. Init & Enable debug :
 
-
+        local IPTools = require('iptools.core'):new()
         IPTools.debug = true
 
 
