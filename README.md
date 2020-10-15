@@ -2,7 +2,7 @@
 
 #### 1. Add it as defold extension : 
 
-    [https://github.com/thetrung/extension-iptools/archive/master.zip](https://github.com/thetrung/extension-iptools/archive/master.zip)
+    https://github.com/thetrung/extension-iptools/archive/master.zip
     
     
 #### 2. Usage :
