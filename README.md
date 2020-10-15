@@ -2,10 +2,14 @@
 
 #### 1. Add it as defold extension : 
 
-    https://github.com/thetrung/extension-iptools/archive/master.zip
+        https://github.com/thetrung/extension-iptools/archive/master.zip
     
     
 #### 2. Usage :
+
+* Note : `cjson` is optional, but if you use it, then `get_location` will return a nice table instead of string.
+
+        https://github.com/Melsoft-Games/defold-cjson/archive/master.zip
 
 1. Init & Enable debug :
 
