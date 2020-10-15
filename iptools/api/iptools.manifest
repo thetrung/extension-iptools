@@ -1,0 +1,49 @@
+- name: iptools
+  type: table
+  desc: Functions and constants for interacting with webview APIs
+  members:
+
+  - name: get_public_ip
+    type: function
+    desc: Get current public ip of the machine, return IP string.
+
+    parameters:
+      - type: function
+        parameters:
+          - name: self
+            type: object
+            desc: The calling script
+
+          - name: callback
+            type: function
+            desc: callback(response)
+
+  - name: get_location
+    type: function
+    desc: Get location from given ip, return table of info on callback.
+
+    parameters:
+      - type: function
+        parameters:
+          - name: self
+            type: object
+            desc: The calling script
+
+          - name: ip_address
+            type: string
+            desc: the IP to retrieve location info.
+
+          - name: callback
+            type: function
+            desc: callback(response)
+
+  - name: print_local_ip
+    type: function
+    desc: print all local ip we get.
+
+    parameters:
+      - type: function
+        parameters:
+          - name: self
+            type: object
+            desc: The calling script
