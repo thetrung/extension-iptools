@@ -1,13 +1,33 @@
-# Welcome to Defold
+### Extension for easy IP related Tools
 
-This project was created from the "empty" project template.
+#### 1. Add it as defold extension : 
 
-The settings in ["game.project"](defold://open?path=/game.project) are all the default. A bootstrap empty ["main.collection"](defold://open?path=/main/main.collection) is included.
+    https://github.com/thetrung/extension-iptools/archive/master.zip
+    
+    
+#### 2. Usage :
 
-Check out [the documentation pages](https://defold.com/learn) for examples, tutorials, manuals and API docs.
+1. Enable debug :
 
-If you run into trouble, help is available in [our forum](https://forum.defold.com).
 
-Happy Defolding!
+        IPTools.debug = true
 
----
+
+2. Get your client public IP
+
+        IPTools:get_public_ip(function(ip_address)
+          print(ip_address)
+        end)
+  
+  
+3. Get your client GeoLocation 
+
+        IPTools:get_location(ip_address, function(info)
+          for k,v in pairs(info) do 
+            print(k .. " = " .. v)
+          end
+        end)
+
+4. Print all local ip address ( with MAC )
+
+        IPTools:print_local_ip()
