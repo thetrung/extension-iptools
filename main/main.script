@@ -1,16 +1,18 @@
-local IPTools = require('iptools.core'):new()
+local IPTools = require('iptools.core')
 
 function init(self)
 
-	-- IPTools.debug = true
+	IPTools.debug = true
+	-- IPTools.config('your_ipinfo_token')
 	
-	IPTools:get_public_ip(function(ip_address)
+	IPTools.get_public_ip(function(ip_address)
 		print(ip_address)
-		IPTools:get_location(ip_address, function(info)
-			for k,v in pairs(info) do 
-				print(k .. " = " .. v)
-			end
-		end)
+	end)
+	
+	IPTools.get_ipinfo(function(info)
+		for k,v in pairs(info) do 
+			print(k .. " = " .. v)
+		end
 	end)
 
 	-- IPTools:print_local_ip()

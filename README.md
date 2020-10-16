@@ -13,8 +13,9 @@
 
 1. Init & Enable debug :
 
-        local IPTools = require('iptools.core'):new()
+        local IPTools = require('iptools.core')
         IPTools.debug = true
+        IPTools.config('your_ipinfo_token')-- register your free 50k req/month at IPinfo.io
 
 
 2. Get your client public IP
@@ -26,7 +27,7 @@
   
 3. Get your client GeoLocation 
 
-        IPTools:get_location(ip_address, function(info)
+        IPTools:get_ipinfo(function(info)
           for k,v in pairs(info) do 
             print(k .. " = " .. v)
           end

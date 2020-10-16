@@ -1,45 +1,43 @@
--- Put functions in this file to use them in several other scripts.
--- To get access to the functions, you need to put:
--- require "my_directory.my_file"
--- in any script using the functions.
+local M = {}
 
-IPTools = {}
+M.debug = false
+M.token = "" -- defaultly use my test account
 
-function IPTools:new()
-	obj = {}
-
-	obj.debug = false
-
-	function obj:get_public_ip(callback)
-		http.request('https://api.ipify.org', 'GET', function(self,_,res)
-			local ip_addr = res.response
-			if obj.debug then print("ip: " .. ip_addr) end
-			callback(ip_addr)
-		end)
-	end
-
-	function obj:get_location(ip_address, callback)
-		http.request('https://ipinfo.io/'..ip_address, 'GET', function(self,_,res)
-			if obj.debug then print(res.response) end
-			if cjson then callback(cjson.decode(res.response))
-					 else callback(res.response) 
-			end
-		end)
-	end
-
-	function obj:print_local_ip()
-		local ip_address = sys.get_ifaddrs()
-		for k,v in pairs(ip_address) do 
-			for kv,vv in pairs(v) do 
-				print(k .. ". " .. kv .. " -- " .. tostring(vv))
-			end
-			print("")
-		end	
-	end
-	
-	setmetatable(obj, self)
-	self.__index = self
-	return obj
+function M.config(ipinfo_token)
+	M.token = ipinfo_token
 end
 
-return IPTools
+function M.get_public_ip(callback)
+	http.request('https://api.ipify.org', 'GET', function(self,_,res)
+		local ip_addr = res.response
+		if M.debug then print("ip: " .. ip_addr) end
+		callback(ip_addr)
+	end)
+end
+
+function M.get_ipinfo(callback)
+	-- curl  -H "Accept: application/json" ipinfo.io/json
+	-- curl -H "Authorization: Bearer $TOKEN" ipinfo.io
+	local header = { 
+		["Accept"] = "application/json",
+		["Authorization"] = "Bearer " .. M.token
+	}
+	http.request('https://ipinfo.io/json', 'GET', function(self,_,res)
+		if M.debug then print(res.response) end
+		if cjson then callback(cjson.decode(res.response))
+				 else callback(res.response) 
+		end
+	end, header)
+end
+
+function M.print_local_ip()
+	local ip_address = sys.get_ifaddrs()
+	for k,v in pairs(ip_address) do 
+		for kv,vv in pairs(v) do 
+			print(k .. ". " .. kv .. " -- " .. tostring(vv))
+		end
+		print("")
+	end	
+end
+
+return M
