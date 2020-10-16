@@ -19,7 +19,7 @@ function IPTools:new()
 	end
 
 	function obj:get_location(ip_address, callback)
-		http.request('http://ipinfo.io/'..ip_address, 'GET', function(self,_,res)
+		http.request('https://ipinfo.io/'..ip_address, 'GET', function(self,_,res)
 			if obj.debug then print(res.response) end
 			if cjson then callback(cjson.decode(res.response))
 					 else callback(res.response) 
